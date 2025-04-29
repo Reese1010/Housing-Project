@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create New Sublease</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main>
+    <h2 class="apartments-title">Create New Sublease</h2>
+
+    <form action="/sublet" method="POST" enctype="multipart/form-data">
+        <label for="title">Listing Title:</label>
+        <input type="text" id="title" name="title" required>
+      
+        <label for="apartmentName">Apartment Name:</label>
+        <input type="text" id="apartmentName" name="apartmentName" required>
+      
+        <label for="price">Price ($/month):</label>
+        <input type="number" id="price" name="price" required>
+      
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+      
+        <label for="image">Upload an Image:</label>
+        <input type="file" id="image" name="image" accept="image/*">
+      
+        <button type="submit" class="btn">Post Sublease</button>
+      </form>
+      
+  </main>
+
+  <footer>
+    <p>&copy; 2025 HousifyU. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>

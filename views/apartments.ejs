@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartments - HousifyU</title>
+    <link rel="stylesheet" href="/styles.css"> 
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <%- include('partials/header') %>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Filters Section -->
+        <section class="filters">
+            <h2 class="filter-title">Filters</h2>
+            <div class="filter-options">
+                <div class="filter-item">
+                    <label for="distance">Distance From Campus</label>
+                    <input type="range" id="distance" name="distance" min="0" max="10" step="1">
+                </div>
+                <div class="filter-item">
+                    <label for="price">Price Range</label>
+                    <input type="range" id="price" name="price" min="400" max="2000" step="50">
+                </div>
+            </div>
+        </section>
+
+        <!-- Apartments List Section -->
+        <section class="apartments">
+            <h2 class="apartments-title">Available Apartments</h2>
+            <div class="apartment-list">
+                <% if (apartments && apartments.length > 0) { %>
+                    <% apartments.forEach(apartment => { %>
+                        <div class="apartment-card">
+                            <h3 class="apartment-name">
+                                <a href="/apartments/<%= apartment._id %>" style="text-decoration: none; color: inherit;">
+                                    <%= apartment.propertyName %>
+                                </a>
+                            </h3>
+
+                            <img src="https://placehold.co/232x154" alt="Apartment Image">
+
+                            <div class="apartment-details">
+                                <% if (apartment.bedrooms && apartment.bedrooms.length > 0) { %>
+                                    <% apartment.bedrooms.forEach(bed => { %>
+                                        <p>
+                                            <strong><%= bed.type %></strong>:
+                                            <% if (bed.available) { %>
+                                                Available |
+                                                Rent: 
+                                                <% if (Array.isArray(bed.rent)) { %>
+                                                    $<%= bed.rent[0] %> - $<%= bed.rent[1] %>
+                                                <% } else { %>
+                                                    $<%= bed.rent %>
+                                                <% } %>
+                                            <% } else { %>
+                                                Not Available
+                                            <% } %>
+                                        </p>
+                                    <% }); %>
+                                <% } else { %>
+                                    <p>No bedroom info</p>
+                                <% } %>
+                            </div>
+
+                            <p class="apartment-distance">
+                                Distance from Campus: <%= apartment.distanceToUniversity || 'N/A' %> miles
+                            </p>
+                            <p class="apartment-pets">
+                                Pets Allowed: <%= apartment.petPolicy || 'No' %>
+                            </p>
+                        </div>
+                    <% }); %>
+                <% } else { %>
+                    <p>No apartments available at the moment.</p>
+                <% } %>
+            </div>
+        </section>
+
+        <!-- Sublet Forum Section -->
+        <section class="sublet-forum">
+            <h2 class="sublet-title">Sublet Forum</h2>
+            <p class="sublet-info">Post your subleases or find available sublets!</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <%- include('partials/footer') %>
+</body>
+</html>

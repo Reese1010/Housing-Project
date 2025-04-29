@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= apartment.propertyName %> - HousifyU</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main>
+    <h2 class="apartments-title"><%= apartment.propertyName %></h2>
+
+    <section class="apartment-details">
+      <img src="https://placehold.co/232x154" alt="Apartment Image">
+
+      <div>
+        <% if (apartment.bedrooms && apartment.bedrooms.length > 0) { %>
+          <% apartment.bedrooms.forEach(bed => { %>
+            <p><strong><%= bed.type %></strong>:
+              <% if (bed.available) { %>
+                Available |
+                Rent: 
+                <% if (Array.isArray(bed.rent)) { %>
+                  $<%= bed.rent[0] %> - $<%= bed.rent[1] %>
+                <% } else { %>
+                  $<%= bed.rent %>
+                <% } %>
+              <% } else { %>
+                Not Available
+              <% } %>
+            </p>
+          <% }); %>
+        <% } %>
+      </div>
+
+      <p><strong>Distance from Campus:</strong> <%= apartment.distanceToUniversity || 'N/A' %> miles</p>
+      <p><strong>Pets Allowed:</strong> <%= apartment.petPolicy || 'No' %></p>
+    </section>
+
+    <!-- Go Back Button -->
+    <div style="margin-top: 30px; text-align: center;">
+      <a href="/apartments" class="btn">← Back to Apartments</a>
+    </div>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

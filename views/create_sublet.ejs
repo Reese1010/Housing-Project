@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Sublease Listing - HousifyU</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">HousifyU</div>
+    <nav>
+        <ul>
+            <li><a href="/home.html">Home</a></li>
+            <li><a href="/apartments">Apartments</a></li>
+            <li><a href="/login.html">Login</a></li>
+            <li><a href="/sublet" class="active">Sublet Forum</a></li>
+            <li><a href="/resources.html">Resources</a></li>
+        </ul>
+    </nav>
+    <div class="search-container">
+        <input type="text" placeholder="Search">
+        <button>🔍</button>
+    </div>
+</header>
+
+<main class="container">
+    <div class="form-box">
+        <h2>Create New Sublet Listing</h2>
+        <form action="/sublet" method="POST">
+            <label for="username">Your Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="description">Listing Description:</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <button type="submit" class="btn">Submit Listing</button>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 HousifyU. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - HousifyU</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main>
+    <div class="container">
+      <div class="form-box">
+        <h2>Login</h2>
+
+        <% if (success_msg) { %>
+          <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
+            <%= success_msg %>
+          </div>
+        <% } %>
+
+        <% if (error_msg) { %>
+          <div style="background-color: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
+            <%= error_msg %>
+          </div>
+        <% } %>
+
+        <form action="/login" method="POST">
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" required>
+
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" required>
+
+          <button class="btn" type="submit">Login</button>
+        </form>
+
+        <p style="margin-top: 15px;">Don't have an account? <a href="/login/register">Register here</a>.</p>
+      </div>
+    </div>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

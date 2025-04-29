@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sublet Forum - HousifyU</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main>
+    <h2 class="apartments-title">Available Subleases</h2>
+
+    <% if (success_msg) { %>
+      <div class="alert success"><%= success_msg %></div>
+    <% } %>
+
+    <% if (error_msg) { %>
+      <div class="alert error"><%= error_msg %></div>
+    <% } %>
+
+    <div style="margin-bottom:20px;">
+      <a href="/sublet/new" class="create-listing-btn">Create New Listing</a>
+    </div>
+
+    <div class="apartment-list">
+      <% subleases.forEach(sublease => { %>
+        <div class="apartment-card">
+          <a href="/sublet/<%= sublease._id %>" style="text-decoration: none; color: inherit;">
+            <img src="<%= sublease.image ? sublease.image : 'https://placehold.co/232x154' %>" alt="Sublease Image">
+            <div class="details">
+              <p><strong>New listing from <% if (sublease.user) { %>@<%= sublease.user.username %><% } else { %>Anonymous<% } %></strong></p>
+              <p>Description: <%= sublease.description.substring(0, 100) %>...</p>
+              <p>Price: $<%= sublease.price %></p>
+              <p>Apartment: <%= sublease.apartmentName %></p>
+              <p>Posted: <%= new Date(sublease.datePosted).toLocaleDateString() %></p>
+            </div>
+          </a>
+        </div>
+      <% }) %>
+    </div>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

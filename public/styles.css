@@ -1,0 +1,503 @@
+/* Global Styles */
+body {
+    background-color: white;
+    font-family: 'Instrument Serif', serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Navbar */
+.navbar {
+    width: 100%;
+    height: 75px;
+    background-color: #283044;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.title {
+    color: #EBF5EE;
+    font-size: 64px;
+}
+
+.menu-icon {
+    width: 30px;
+    height: 35px;
+}
+
+/* Login Form */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.form-box {
+    width: 350px;
+    background-color: white;
+    border: 1px solid black;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    text-align: left;
+    font-size: 18px;
+    margin: 10px 0 5px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn {
+    background-color: #283044;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn.secondary {
+    background-color: #78A1BB;
+}
+
+
+/* Login Form */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.form-box {
+    width: 350px;
+    background-color: white;
+    border: 1px solid black;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    text-align: left;
+    font-size: 18px;
+    margin: 10px 0 5px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn {
+    background-color: #283044;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn.secondary {
+    background-color: #78A1BB;
+}
+
+
+/* Home Section */
+/* Navbar Fix (if using <header> instead of .navbar) */
+header {
+    width: 100%;
+    height: 75px;
+    background-color: #283044;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+header .logo {
+    font-size: 28px;
+    color: #EBF5EE;
+    font-weight: bold;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: #EBF5EE;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+header nav ul li a.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* Fix for Search Bar */
+.search-container {
+    display: flex;
+    align-items: center;
+    background: #F5F5F5;
+    border-radius: 10px;
+    border: 1px solid #757575;
+    padding: 5px 10px;
+    max-width: 250px; /* Prevents it from stretching */
+}
+
+.search-container input {
+    flex-grow: 1;
+    border: none;
+    background: transparent;
+    padding: 5px;
+    font-size: 16px;
+    color: #283044;
+    outline: none;
+}
+
+.search-container button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #283044;
+}
+
+/* Hero Section Fix */
+.hero {
+    width: 100%;
+    height: 60vh; /* Adjust for responsiveness */
+    text-align: center;
+    padding: 80px 20px;
+    background: url('img/home-hero.jpg') no-repeat center center;
+    background-size: cover;
+    color: #EBF5EE;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero h1 {
+    font-size: 50px;
+    font-style: italic;
+    margin-bottom: 20px;
+    color: rgba(0, 0, 0, 0.8); /* Darker text */
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+/* CTA Buttons */
+.cta-buttons {
+    margin-top: 20px;
+}
+
+.cta-buttons .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 20px;
+    font-style: italic;
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 10px;
+}
+
+.cta-buttons .btn.primary {
+    background-color: #283044;
+    color: #C4D1D8;
+}
+
+.cta-buttons .btn.secondary {
+    background-color: transparent;
+    border: 2px solid #78A1BB;
+    color: #78A1BB;
+}
+
+/* Apartments Page Styles */
+
+/* Header Section */
+header {
+    background-color: #283044;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header .logo {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    font-family: SF Pro Text, sans-serif;
+}
+
+nav ul li a.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.search-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.search-container input {
+    padding: 10px;
+    width: 300px;
+    font-size: 16px;
+}
+
+.search-container button {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Apartments Title Section */
+.apartments-title {
+    color: #333;
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Apartment Listing Section */
+.apartment-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.apartment-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.apartment-name {
+    font-size: 24px;
+    font-weight: 400;
+    color: #333;
+}
+
+.apartment-details,
+.apartment-address,
+.apartment-distance {
+    font-size: 16px;
+    color: #555;
+    margin: 10px 0;
+}
+
+/* Filters Section */
+.filters {
+    margin: 40px 0;
+}
+
+.filter-title {
+    font-size: 20px;
+    font-weight: 400;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.filter-options {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.filter-item {
+    width: 200px;
+}
+
+.filter-item label {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+/* Sublet Forum Section */
+.sublet-forum {
+    margin: 40px 0;
+}
+
+.sublet-title {
+    font-size: 24px;
+    color: #333;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.sublet-info {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Footer Section */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
+
+
+/* Resources Page */
+/* Resources Page Specific Styles */
+
+/* Main Content Styles */
+main {
+    padding: 40px 20px;
+    max-width: 1152px;
+    margin: 0 auto;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-title h1 {
+    color: #283044;
+    font-size: 40px;
+    font-family: 'Instrument Serif', serif;
+}
+
+/* Resource Cards Styles */
+.resource-card {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.resource-card h2 {
+    color: #283044;
+    font-size: 24px;
+    font-family: 'Instrument Serif', serif;
+}
+
+.resource-card p {
+    color: black;
+    font-size: 15px;
+    line-height: 22px;
+    word-wrap: break-word;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #283044;
+    color: #EBF5EE;
+    text-align: center;
+    padding: 20px;
+}
+
+footer p {
+    margin: 0;
+}
+
+/*Sublet form*/
+
+.create-listing-container {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.create-listing-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 24px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.create-listing-btn:hover {
+    background-color: #0056b3;
+}
+
+.btn {
+    background-color: #283044;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  
+  .btn:hover {
+    background-color: #1c2331;
+  }

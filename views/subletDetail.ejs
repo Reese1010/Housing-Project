@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= sublease.title %> - Sublease Details</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main>
+    <div class="container">
+      <h2><%= sublease.title %></h2>
+
+      <img src="<%= sublease.image ? sublease.image : 'https://placehold.co/400x300' %>" alt="Listing Image" style="max-width:400px; height:auto; margin-bottom:20px;">
+
+      <p><strong>Description:</strong> <%= sublease.description %></p>
+      <p><strong>Price per Month:</strong> $<%= sublease.price %></p>
+      <p><strong>Apartment:</strong> <%= sublease.apartmentName %></p>
+      <p><strong>Posted by:</strong> @<%= sublease.user ? sublease.user.username : 'Anonymous' %></p>
+      <p><strong>Date Posted:</strong> <%= new Date(sublease.datePosted).toLocaleDateString() %></p>
+
+      <% if (sublease.user && sublease.user._id && sublease.user._id.toString() === (userId || '') ) { %>
+        <form action="/sublet/<%= sublease._id %>?_method=DELETE" method="POST">
+          <button type="submit" class="btn delete">Delete This Sublease</button>
+        </form>
+      <% } %>
+
+      <div style="margin-top:20px;">
+        <a href="/sublet" class="btn secondary">Back to Sublet Listings</a>
+      </div>
+    </div>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>
