@@ -2,35 +2,85 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title><%= sublease.title %> - Sublease Details</title>
+  <title><%= sublease.title %> - HousifyU</title>
   <link rel="stylesheet" href="/styles.css">
+  <style>
+    .sublease-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .sublease-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .sublease-info p {
+      font-size: 1.1em;
+      margin: 10px 0;
+    }
+
+    .sublease-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      color: white;
+      font-weight: bold;
+    }
+
+    .btn.delete {
+      background-color: #222f3e;
+    }
+
+    .btn.back {
+      background-color: #5d99c6;
+    }
+  </style>
 </head>
 <body>
   <%- include('partials/header') %>
 
-  <main>
-    <div class="container">
-      <h2><%= sublease.title %></h2>
+  <div class="sublease-container">
+    <h2><%= sublease.title %></h2>
+    <% if (sublease.image) { %>
+      <img src="<%= sublease.image %>" alt="Sublease Image" class="sublease-image">
+    <% } %>
 
-      <img src="<%= sublease.image ? sublease.image : 'https://placehold.co/400x300' %>" alt="Listing Image" style="max-width:400px; height:auto; margin-bottom:20px;">
-
+    <div class="sublease-info">
       <p><strong>Description:</strong> <%= sublease.description %></p>
       <p><strong>Price per Month:</strong> $<%= sublease.price %></p>
       <p><strong>Apartment:</strong> <%= sublease.apartmentName %></p>
-      <p><strong>Posted by:</strong> @<%= sublease.user ? sublease.user.username : 'Anonymous' %></p>
+      <p><strong>Posted by:</strong> @<%= sublease.user ? sublease.user.username : 'Unknown' %></p>
       <p><strong>Date Posted:</strong> <%= new Date(sublease.datePosted).toLocaleDateString() %></p>
+    </div>
 
-      <% if (sublease.user && sublease.user._id && sublease.user._id.toString() === (userId || '') ) { %>
+    <% if (sublease.user && sublease.user._id && sublease.user._id.toString() === (userId || '') ) { %>
+      <div class="sublease-buttons">
         <form action="/sublet/<%= sublease._id %>?_method=DELETE" method="POST">
           <button type="submit" class="btn delete">Delete This Sublease</button>
         </form>
-      <% } %>
-
-      <div style="margin-top:20px;">
-        <a href="/sublet" class="btn secondary">Back to Sublet Listings</a>
+        <a href="/sublet" class="btn back">Back to Sublet Listings</a>
       </div>
-    </div>
-  </main>
+    <% } else { %>
+      <div class="sublease-buttons">
+        <a href="/sublet" class="btn back">Back to Sublet Listings</a>
+      </div>
+    <% } %>
+  </div>
 
   <%- include('partials/footer') %>
 </body>

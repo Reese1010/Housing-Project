@@ -1,92 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apartments - HousifyU</title>
-    <link rel="stylesheet" href="/styles.css"> 
+  <meta charset="UTF-8">
+  <title>Apartments - HousifyU</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin: 20px auto;
+      justify-content: center;
+      max-width: 1000px;
+    }
+
+    .filter-bar label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .apartment-card {
+      cursor: pointer;
+    }
+
+    form.filter-form select,
+    form.filter-form input {
+      padding: 6px;
+    }
+
+    .apartment-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .apartment-card {
+      border: 1px solid #ddd;
+      padding: 16px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <%- include('partials/header') %>
+  <%- include('partials/header') %>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Filters Section -->
-        <section class="filters">
-            <h2 class="filter-title">Filters</h2>
-            <div class="filter-options">
-                <div class="filter-item">
-                    <label for="distance">Distance From Campus</label>
-                    <input type="range" id="distance" name="distance" min="0" max="10" step="1">
-                </div>
-                <div class="filter-item">
-                    <label for="price">Price Range</label>
-                    <input type="range" id="price" name="price" min="400" max="2000" step="50">
-                </div>
-            </div>
-        </section>
+  <main>
+    <h2 class="apartments-title">Available Apartments</h2>
 
-        <!-- Apartments List Section -->
-        <section class="apartments">
-            <h2 class="apartments-title">Available Apartments</h2>
-            <div class="apartment-list">
-                <% if (apartments && apartments.length > 0) { %>
-                    <% apartments.forEach(apartment => { %>
-                        <div class="apartment-card">
-                            <h3 class="apartment-name">
-                                <a href="/apartments/<%= apartment._id %>" style="text-decoration: none; color: inherit;">
-                                    <%= apartment.propertyName %>
-                                </a>
-                            </h3>
+    <form class="filter-form" method="get" action="/apartments">
+      <div class="filter-bar">
+        <!-- Search -->
+        <div>
+          <label for="name">Search by Name</label>
+          <input type="text" name="name" id="name" value="<%= name || '' %>">
+        </div>
 
-                            <img src="https://placehold.co/232x154" alt="Apartment Image">
+        <!-- Distance -->
+        <div>
+          <label for="distance">Max Distance (miles)</label>
+          <input type="number" name="distance" step="0.1" value="<%= distance || '' %>">
+        </div>
 
-                            <div class="apartment-details">
-                                <% if (apartment.bedrooms && apartment.bedrooms.length > 0) { %>
-                                    <% apartment.bedrooms.forEach(bed => { %>
-                                        <p>
-                                            <strong><%= bed.type %></strong>:
-                                            <% if (bed.available) { %>
-                                                Available |
-                                                Rent: 
-                                                <% if (Array.isArray(bed.rent)) { %>
-                                                    $<%= bed.rent[0] %> - $<%= bed.rent[1] %>
-                                                <% } else { %>
-                                                    $<%= bed.rent %>
-                                                <% } %>
-                                            <% } else { %>
-                                                Not Available
-                                            <% } %>
-                                        </p>
-                                    <% }); %>
-                                <% } else { %>
-                                    <p>No bedroom info</p>
-                                <% } %>
-                            </div>
+        <!-- Bedroom Type -->
+        <div>
+          <label for="bedroomType">Bedroom Type</label>
+          <select name="bedroomType" id="bedroomType">
+            <option value="">Any</option>
+            <% bedroomTypes.forEach(type => { %>
+              <option value="<%= type %>" <%= bedroomType === type ? 'selected' : '' %>><%= type %></option>
+            <% }) %>
+          </select>
+        </div>
 
-                            <p class="apartment-distance">
-                                Distance from Campus: <%= apartment.distanceToUniversity || 'N/A' %> miles
-                            </p>
-                            <p class="apartment-pets">
-                                Pets Allowed: <%= apartment.petPolicy || 'No' %>
-                            </p>
-                        </div>
-                    <% }); %>
+        <!-- Min Rent -->
+        <div>
+          <label for="minRent">Min Rent</label>
+          <input type="number" name="minRent" value="<%= minRent || '' %>">
+        </div>
+
+        <!-- Max Rent -->
+        <div>
+          <label for="maxRent">Max Rent</label>
+          <input type="number" name="maxRent" value="<%= maxRent || '' %>">
+        </div>
+
+        <!-- Pet Policy -->
+        <div>
+          <label for="petPolicy">Pet Policy</label>
+          <select name="petPolicy" id="petPolicy">
+            <option value="">Any</option>
+            <option value="Yes" <%= petPolicy === 'Yes' ? 'selected' : '' %>>Yes</option>
+            <option value="No" <%= petPolicy === 'No' ? 'selected' : '' %>>No</option>
+          </select>
+        </div>
+
+        <!-- Submit Button -->
+        <div style="align-self: end;">
+          <button class="btn" type="submit">Apply Filters</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="apartment-list">
+      <% if (apartments.length > 0) { %>
+        <% apartments.forEach(apartment => { %>
+          <div class="apartment-card" onclick="window.location.href='/apartments/<%= apartment._id %>'">
+            <img src="<%= apartment.image || 'https://placehold.co/232x154' %>" alt="Apartment Image">
+            <h3><%= apartment.name %></h3>
+
+            <% apartment.bedrooms.forEach(bed => { %>
+              <p><strong><%= bed.type %></strong>: 
+                <%= bed.available ? 'Available' : 'Not Available' %> | 
+                Rent: 
+                <% if (Array.isArray(bed.rent)) { %>
+                  $<%= bed.rent[0] %> - $<%= bed.rent[1] %>
                 <% } else { %>
-                    <p>No apartments available at the moment.</p>
+                  $<%= bed.rent %>
                 <% } %>
-            </div>
-        </section>
+              </p>
+            <% }) %>
 
-        <!-- Sublet Forum Section -->
-        <section class="sublet-forum">
-            <h2 class="sublet-title">Sublet Forum</h2>
-            <p class="sublet-info">Post your subleases or find available sublets!</p>
-        </section>
-    </main>
+            <p>Distance from Campus: <%= apartment.distanceToUniversity %> miles</p>
+            <p>Pets Allowed: <%= apartment.petPolicy %></p>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p>No apartments match your criteria.</p>
+      <% } %>
+    </div>
+  </main>
 
-    <!-- Footer -->
-    <%- include('partials/footer') %>
+  <%- include('partials/footer') %>
 </body>
 </html>

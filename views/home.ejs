@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HousifyU - Home</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main class="home">
+    <section class="hero">
+      <h1>Welcome to HousifyU</h1>
+      <p>Your one-stop solution to find, list, and manage student housing near UNCC.</p>
+      <a href="/apartments" class="btn">Browse Apartments</a>
+      <a href="/sublet" class="btn">View Sublet Listings</a>
+    </section>
+
+    <section class="features">
+      <div class="feature">
+        <h3>Verified Listings</h3>
+        <p>Only trusted properties and subleases approved by students.</p>
+      </div>
+      <div class="feature">
+        <h3>Student Friendly</h3>
+        <p>Filter listings based on your preferences and budget.</p>
+      </div>
+      <div class="feature">
+        <h3>Easy Posting</h3>
+        <p>Create your own sublease listings in just a few clicks.</p>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

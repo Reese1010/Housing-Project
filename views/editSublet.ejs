@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Sublease</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main>
+    <h2 class="apartments-title">Edit Your Sublease</h2>
+    <form action="/sublet/<%= sublease._id %>?_method=PUT" method="POST" enctype="multipart/form-data" class="form-box">
+      <label for="title">Title:</label>
+      <input type="text" name="title" value="<%= sublease.title %>" required>
+
+      <label for="description">Description:</label>
+      <textarea name="description" required><%= sublease.description %></textarea>
+
+      <label for="price">Price per Month ($):</label>
+      <input type="number" name="price" value="<%= sublease.price %>" required>
+
+      <label for="apartmentName">Apartment Name:</label>
+      <input type="text" name="apartmentName" value="<%= sublease.apartmentName %>" required>
+
+      <label for="image">Change Image:</label>
+      <input type="file" name="image" accept="image/*">
+
+      <% if (sublease.image) { %>
+        <p>Current image: <img src="<%= sublease.image %>" style="max-width: 150px;"></p>
+      <% } %>
+
+      <button type="submit" class="btn">Update Sublease</button>
+    </form>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

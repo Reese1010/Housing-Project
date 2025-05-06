@@ -14,60 +14,54 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error(err));
 
-// Models
-const Apartment = require('./models/apartment');
-const Sublease = require('./models/sublease');
-
 // Middleware
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Setup sessions (needed before flash)
+// Session setup
 app.use(session({
-  secret: 'housifyu_secret', 
+  secret: 'housifyu_secret',
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI })
 }));
 
-// Setup flash
+// Flash messages
 app.use(flash());
-
-// Middleware to pass flash messages to all views
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
-  res.locals.userId = req.session.userId || null; 
+  res.locals.userId = req.session.userId || null;
   next();
 });
 
-// Set EJS view engine
+// View engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Import route files
+// Routes
 const loginRoutes = require('./routes/loginRoutes');
+const profileRoutes = require('./routes/profileRoutes');
 const subleaseRoutes = require('./routes/subleaseRoutes');
-const apartmentRoutes = require('./routes/apartmentRoutes'); 
+const apartmentRoutes = require('./routes/apartmentRoutes');
+const authRoutes = require('./routes/authRoutes'); // <-- NEW
 
-// --- Routes ---
-
-// Home page
+// Pages
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'home.html'));
+  res.render('home');
 });
 
-// Apartments page + detail
-app.use('/apartments', apartmentRoutes);
-
-// Sublet forum pages
-app.use('/sublet', subleaseRoutes);
-
-// Login & Register
 app.use('/login', loginRoutes);
+app.use('/profile', profileRoutes);
+app.use('/sublet', subleaseRoutes);
+app.use('/apartments', apartmentRoutes);
+app.use('/', authRoutes); // <-- Register logout route
 
-// --- End Routes ---
+// Resources Page
+app.get('/resources', (req, res) => {
+  res.render('resources');
+});
 
 // Start server
 app.listen(PORT, () => {

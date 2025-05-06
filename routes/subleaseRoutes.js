@@ -101,4 +101,47 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// GET: Show edit form
+router.get('/:id/edit', async (req, res) => {
+  try {
+    const sublease = await Sublease.findById(req.params.id).lean();
+    if (!sublease) return res.status(404).send('Sublease not found');
+    if (!req.session.userId || sublease.user.toString() !== req.session.userId) {
+      req.flash('error_msg', 'Unauthorized');
+      return res.redirect('/sublet');
+    }
+    res.render('editSublet', { sublease });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
+
+// PUT: Handle form submission
+router.put('/:id', upload.single('image'), async (req, res) => {
+  try {
+    const sublease = await Sublease.findById(req.params.id);
+    if (!sublease || sublease.user.toString() !== req.session.userId) {
+      req.flash('error_msg', 'Unauthorized or not found');
+      return res.redirect('/sublet');
+    }
+
+    sublease.title = req.body.title;
+    sublease.description = req.body.description;
+    sublease.price = req.body.price;
+    sublease.apartmentName = req.body.apartmentName;
+    if (req.file) {
+      sublease.image = `/uploads/${req.file.filename}`;
+    }
+
+    await sublease.save();
+    req.flash('success_msg', 'Sublease updated!');
+    res.redirect('/profile');
+  } catch (err) {
+    console.error(err);
+    req.flash('error_msg', 'Update failed.');
+    res.redirect('/sublet');
+  }
+});
+
 module.exports = router;

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Profile - HousifyU</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .profile-container {
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    .profile-header {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .profile-info {
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+
+    .sublease-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .sublease-card {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 300px;
+    }
+
+    .sublease-card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .sublease-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .sublease-card p {
+      font-size: 15px;
+      margin: 5px 0;
+    }
+
+    .sublease-buttons {
+      margin-top: 12px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      flex: 1;
+      background-color: #283044;
+      color: white;
+      padding: 8px;
+      font-size: 14px;
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .btn.edit {
+      background-color: #78A1BB;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <div class="profile-container">
+    <div class="profile-header">Welcome, <%= user.username %>!</div>
+    <div class="profile-info">Email: <%= user.email %></div>
+
+    <h2>Your Subleases</h2>
+    <div class="sublease-grid">
+      <% if (subleases.length === 0) { %>
+        <p>You haven't posted any subleases yet.</p>
+      <% } else { %>
+        <% subleases.forEach(sub => { %>
+          <div class="sublease-card">
+            <% if (sub.image) { %>
+              <img src="<%= sub.image %>" alt="Sublease image">
+            <% } else { %>
+              <img src="https://placehold.co/400x300" alt="Placeholder">
+            <% } %>
+            
+            <h3><a href="/sublet/<%= sub._id %>"><%= sub.title %></a></h3>
+            <p><strong>Price:</strong> $<%= sub.price %></p>
+            <p><strong>Apartment:</strong> <%= sub.apartmentName %></p>
+            <p><strong>Date Posted:</strong> <%= new Date(sub.datePosted).toLocaleDateString() %></p>
+
+            <div class="sublease-buttons">
+              <a href="/sublet/<%= sub._id %>/edit" class="btn edit">Edit</a>
+              <form action="/sublet/<%= sub._id %>?_method=DELETE" method="POST" style="display:inline;">
+                <button type="submit" class="btn">Delete</button>
+              </form>
+            </div>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+  </div>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

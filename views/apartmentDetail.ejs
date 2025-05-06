@@ -9,10 +9,14 @@
   <%- include('partials/header') %>
 
   <main>
-    <h2 class="apartments-title"><%= apartment.propertyName %></h2>
+    <h2 class="apartments-title"><%= apartment.name %></h2>
 
     <section class="apartment-details">
-      <img src="https://placehold.co/232x154" alt="Apartment Image">
+      <% if (apartment.image) { %>
+        <img src="<%= apartment.image %>" alt="Apartment Image" style="max-width: 400px; height: auto; border-radius: 8px;">
+      <% } else { %>
+        <img src="https://placehold.co/232x154" alt="Placeholder Image" style="max-width: 400px; height: auto; border-radius: 8px;">
+      <% } %>
 
       <div>
         <% if (apartment.bedrooms && apartment.bedrooms.length > 0) { %>
